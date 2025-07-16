@@ -8,11 +8,11 @@
   "navigation": {
     "main": [
       { "link": "/", "title": "Home" },
-      { "link": "/lab", "title": "Product Catalog" }
+      { "link": "/lab.php", "title": "Product Catalog" }
     ],
     "auth": [
       { "link": "/login", "title": "Login" },
-      { "link": "/register", "title": "Register" }
+      { "link": "/lab.php.php", "title": "Lab" }
     ]
   },
   "footer": {
@@ -40,6 +40,6 @@
   },
   "cta": {
     "label": "Start the lab",
-    "link": "/lab"
+    "link": "/lab.php.php"
   }
 } 

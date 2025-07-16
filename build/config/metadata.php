@@ -31,7 +31,7 @@ class Metadata {
                         ],
                         'auth' => [
                             ['link' => '/login', 'title' => 'Login'],
-                            ['link' => '/register', 'title' => 'Register']
+                            ['link' => '/lab.php.php', 'title' => 'Lab']
                         ]
                     ],
                     'footer' => [
@@ -59,7 +59,7 @@ class Metadata {
                     ],
                     'cta' => [
                         'label' => 'Start the lab',
-                        'link' => '/lab'
+                        'link' => '/lab.php'
                     ]
                 ];
             }

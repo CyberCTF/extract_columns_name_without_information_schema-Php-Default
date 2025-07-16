@@ -2,11 +2,11 @@ version: '3.8'
 
 services:
   php-app:
-    image: php:8.2-apache
+    build:
+      context: ../build
+      dockerfile: Dockerfile
     ports:
       - "8000:80"
-    volumes:
-      - ../build:/var/www/html
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html
     restart: unless-stopped

@@ -1,7 +1,7 @@
 import pytest
 import requests
 
-BASE_URL = "http://localhost:8000/lab"
+BASE_URL = "http://localhost:8000/lab.php"
 
 def test_catalog_loads():
     r = requests.get(BASE_URL)

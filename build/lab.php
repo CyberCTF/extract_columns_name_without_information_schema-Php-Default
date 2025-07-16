@@ -72,13 +72,13 @@ mysqli_close($conn);
                 <div class="flex items-center gap-2 mb-4">
                     <span class="text-lg font-bold text-green-400">$<?php echo htmlspecialchars($product['price']); ?></span>
                 </div>
-                <a href="/lab" class="inline-block mt-4 px-6 py-2 rounded-lg bg-slate-800 text-white hover:bg-slate-700 transition">Back to Catalog</a>
+                <a href="/lab.php" class="inline-block mt-4 px-6 py-2 rounded-lg bg-slate-800 text-white hover:bg-slate-700 transition">Back to Catalog</a>
             </div>
         <?php elseif ($error): ?>
             <div class="glass max-w-lg w-full p-8 text-center">
                 <div class="text-red-400 font-bold mb-2">An error occurred</div>
                 <div class="text-neutral-300 text-sm"><?php echo htmlspecialchars($error); ?></div>
-                <a href="/lab" class="inline-block mt-4 px-6 py-2 rounded-lg bg-slate-800 text-white hover:bg-slate-700 transition">Back to Catalog</a>
+                <a href="/lab.php" class="inline-block mt-4 px-6 py-2 rounded-lg bg-slate-800 text-white hover:bg-slate-700 transition">Back to Catalog</a>
             </div>
         <?php else: ?>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
@@ -88,7 +88,7 @@ mysqli_close($conn);
                         <h3 class="text-lg font-semibold text-white mb-1"><?php echo htmlspecialchars($prod['name']); ?></h3>
                         <p class="text-neutral-400 text-sm mb-2 text-center"><?php echo htmlspecialchars($prod['description']); ?></p>
                         <span class="text-green-400 font-bold mb-2">$<?php echo htmlspecialchars($prod['price']); ?></span>
-                        <a href="/lab?id=<?php echo urlencode($prod['id']); ?>" class="mt-2 px-4 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-700 transition w-full text-center">View</a>
+                        <a href="/lab.php.php?id=<?php echo urlencode($prod['id']); ?>" class="mt-2 px-4 py-2 rounded-lg bg-slate-900 text-white hover:bg-slate-700 transition w-full text-center">View</a>
                     </div>
                 <?php endforeach; ?>
             </div>

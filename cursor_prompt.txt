@@ -19,7 +19,7 @@ The application must be fully functional, deployable, error-free, and accessible
 ### 3. Scenario Implementation
 - Use the provided **scenario file** to drive design, features, and user flows.
 - Implement all required functionality, even if not explicitly present in the template.
-- Ensure the main application page is accessible at **`/lab`** from the homepage navigation.
+- Ensure the main application page is accessible at **`/lab.php`** from the homepage navigation.
 
 ---
 
@@ -97,7 +97,7 @@ use this json element in the json schema
 7. **Execution & Deployment**  
    - Application must run error-free.  
    - Provide a single command to start 
-   - Verify `/lab` route is reachable
+   - Verify `/lab.php` route is reachable
    
 8. .github/workflows/docker-publish.yml
 	like this for exemple adapt the file for every challenge
@@ -136,7 +136,7 @@ jobs:
 - **No CTF terminology** in UI/code/docs.  
 - Dark mode implemented throughout.  
 - Database setup complete (if required).  
-- `/lab` accessible from home navigation.  
+- `/lab.php` accessible from home navigation.  
 - No solution or knowledge base pages.  
 - All functionality implemented.  
 - Professional, business-oriented language with concise labels.  

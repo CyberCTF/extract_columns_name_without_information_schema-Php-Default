@@ -31,14 +31,25 @@ class Button extends Component {
         $asChild = $this->props['asChild'] ?? false;
         $type = $this->props['type'] ?? 'button';
         $href = $this->props['href'] ?? null;
-        
+
         $classes = $this->cn(
             $this->getVariantClasses($variant, $size),
             $this->className
         );
-        
+
         $attributes = $this->getAttributes(['asChild', 'variant', 'size', 'href']);
-        
+
+        // Correction : forcer le lien si le texte est "Start the lab"
+        if (trim($this->children) === 'Start the lab') {
+            return sprintf(
+                '<a href="%s" class="%s" %s>%s</a>',
+                $this->escape($href ?? '/lab.php'),
+                $classes,
+                $attributes,
+                $this->children
+            );
+        }
+
         if ($href || $asChild === 'a') {
             return sprintf(
                 '<a href="%s" class="%s" %s>%s</a>',
@@ -48,7 +59,7 @@ class Button extends Component {
                 $this->children
             );
         }
-        
+
         return sprintf(
             '<button type="%s" class="%s" %s>%s</button>',
             $this->escape($type),

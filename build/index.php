@@ -146,6 +146,8 @@
                 <?php 
                 echo $loader->render('Button', [
                     'variant' => 'outline',
+                    'href' => $cta['link'],
+                    'asChild' => 'a',
                     'className' => 'w-40 rounded-lg px-4 py-2 text-sm text-center bg-white text-black border border-neutral-200 shadow hover:bg-neutral-100 transition-colors dark:bg-black dark:text-white dark:border-neutral-800 dark:hover:bg-neutral-900'
                 ], htmlspecialchars($cta['label']));
                 ?>

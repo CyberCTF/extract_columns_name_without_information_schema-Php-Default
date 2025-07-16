@@ -45,7 +45,7 @@ class Label extends Component {
         $attributes = $this->getAttributes(['for', 'htmlFor']);
         
         return sprintf(
-            '<label for="%s" class="%s" %s>%s</label>',
+            '<label for="%s" class="%s" %s>%s</lab.phpel>',
             $this->escape($for),
             $classes,
             $attributes,
