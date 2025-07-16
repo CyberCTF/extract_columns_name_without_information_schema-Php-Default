@@ -1,0 +1,74 @@
+{
+  "mission_context": {
+    "fictional_company_environment": "A mid-2000s e-commerce website called \"RetroShop\" running old PHP code and using a MySQL 4.1 database backend. The backend handles customers, orders, and products, with a classic LAMP stack exposed to the internet for legacy reasons.",
+    "technical_setup_and_constraints": "The web application is built using PHP 4.x and MySQL 4.1. Due to technical debt and legacy setup, there is no access to modern conveniences like information_schema for schema enumeration. Debugging is turned off, but certain error messages are still reflected to the user upon malformed SQL queries. Application is vulnerable to classic UNION-based SQL Injection in a 'product' ID parameter.",
+    "discovery_context": "During a pentest engagement, tampering the 'id' parameter in product.php?id= led to different errors when malformed SQL was provided. This hinted at UNION-based injection. Attempts to extract schema using 'information_schema' failed, but server-generated errors helped deduce column names by trial and error."
+  },
+  "element_to_proof": "The valid column name: 'price' from the 'products' table.",
+  "walkthrough": {
+    "title": "Discover Column Names in MySQL 4.x Using Error-Based UNION Injection",
+    "steps": [
+      {
+        "question": "What is the first step to test if the 'id' parameter is vulnerable to UNION-based SQL injection?",
+        "hint": "Inject a simple ' OR 1=1-- -' or append 'UNION SELECT' to the URL.",
+        "solution": "Send a request to product.php?id=1 UNION SELECT 1,2,3-- - and check if there is an error or new data displayed."
+      },
+      {
+        "question": "How can you enumerate the correct number of columns for a successful UNION SELECT?",
+        "hint": "Increase or decrease the number of select fields and look for a valid page or error message.",
+        "solution": "Test product.php?id=1 UNION SELECT 1,2-- -, then product.php?id=1 UNION SELECT 1,2,3-- -, etc., until the error disappears."
+      },
+      {
+        "question": "Once you know the number of columns, how do you start guessing column names?",
+        "hint": "Replace '1', '2', etc., with a hypothetical column name and watch for errors.",
+        "solution": "Try product.php?id=1 UNION SELECT price,2,3-- - and observe the error. Repeat for common names like 'username', 'email', etc."
+      },
+      {
+        "question": "What kind of error indicates you have guessed the correct column name?",
+        "hint": "Look for a change in the error message—no unknown column error means success.",
+        "solution": "If 'Unknown column' disappears and the page renders differently or exposes new data, you have a valid column."
+      },
+      {
+        "question": "How can you use your discovered column to retrieve sensitive data?",
+        "hint": "Use the valid column in a UNION SELECT to extract its values to the frontend.",
+        "solution": "Craft payloads like product.php?id=1 UNION SELECT price,2,3 FROM products-- - to display product prices."
+      }
+    ],
+    "final_flag_info": "The user will discover the valid column name 'price' from the 'products' table, demonstrating successful exploitation."
+  },
+  "lab_readme": {
+    "title": "Extract MySQL 4.x Column Names Without information_schema—A Classic UNION SQLi Lab",
+    "description": "Explore error-based column name extraction in a legacy MySQL 4.x environment. Learn manual SQLi exploitation techniques from the time before information_schema.",
+    "objectives": [
+      "Detect classic UNION-based SQL injection",
+      "Determine the correct number of columns in a legacy query",
+      "Leverage MySQL error messages for column name guessing",
+      "Extract column names without information_schema access"
+    ],
+    "difficulty": "Intermediate",
+    "estimated_time": "1 hour",
+    "prerequisites": [
+      "Basic knowledge of SQL syntax",
+      "Familiarity with SQL injection concepts",
+      "Experience with intercepting HTTP requests (Burp Suite, curl)"
+    ],
+    "skills_learned": [
+      "Manual SQLi exploitation in legacy MySQL",
+      "Schema discovery without information_schema",
+      "Error message analysis and payload crafting"
+    ],
+    "project_structure": [
+      "folder : build",
+      "folder : deploy",
+      "folder : test",
+      "folder : docs",
+      "file : readme.md",
+      "file : .gitignore"
+    ],
+    "quick_start": {
+      "prerequisites": "Docker with Docker Compose installed",
+      "installation": "git clone <repo-url>; cd project; docker-compose up --build; Access the challenge at http://localhost:8080"
+    },
+    "issue_tracker_url": "https://github.com/your-org/ctf-labs/issues"
+  }
+}
